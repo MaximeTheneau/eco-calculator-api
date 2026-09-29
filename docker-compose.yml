@@ -2,17 +2,19 @@ services:
   db:
     image: mysql:8.4
     container_name: eco-calculator-db
+    env_file:
+      - .env.local
     environment:
       MYSQL_DATABASE: ecocalculator
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
       - db-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_password"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "${MYSQL_USER}", "-p${MYSQL_ROOT_PASSWORD}"]
       interval: 5s
       timeout: 5s
       retries: 20
@@ -25,6 +27,8 @@ services:
         condition: service_healthy
     ports:
       - "8080:8080"
+    env_file:
+      - .env.local
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/ecocalculator
       SPRING_DATASOURCE_USERNAME: ${DB_USER}
