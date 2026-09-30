@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.core.annotation.Order;
 
 import java.io.IOException;
 
@@ -18,6 +19,7 @@ import java.io.IOException;
  * rôles...), Spring Security serait plus adapté.
  */
 @Component
+@Order(1)
 public class ApiKeyFilter extends HttpFilter {
 
     private static final String HEADER_NAME = "X-API-KEY";
