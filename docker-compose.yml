@@ -2,8 +2,6 @@ services:
   db:
     image: mysql:8.4
     container_name: eco-calculator-db
-    env_file:
-      - .env.local
     environment:
       MYSQL_DATABASE: ecocalculator
       MYSQL_USER: ${MYSQL_USER}
@@ -27,8 +25,6 @@ services:
         condition: service_healthy
     ports:
       - "8080:8080"
-    env_file:
-      - .env.local
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/ecocalculator
       SPRING_DATASOURCE_USERNAME: ${DB_USER}
