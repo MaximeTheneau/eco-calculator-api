@@ -1,4 +1,4 @@
-package https.github.com.MaximeTheneau.eco_calculator_api;
+package com.ecocalculatorapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
